@@ -15,4 +15,10 @@ CheatInstances is a tool to get the Spot instances from AWS through CLI
     └── slack.go
 ```
 
+## Third Party Integrations
+
+Slack: We have integrated Slack Chat based integration on every request you make
+
+
+
 
