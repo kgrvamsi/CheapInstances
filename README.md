@@ -45,16 +45,18 @@ Enter any one in the following:
 
 ### Things Done So Far
 
+```
 1)Create the Spot Instance Request.
 2)Check for the Spot Instance Price History.
 3)Cancel the Spot Instance Request.
 4)Get the Spot Instances Request made from the Account.
-
+```
 ### Yet to Do
 
+```
 1)Get the Least Price based zone and the price.
 2)Anticipating the Price for the next Request.
-
+```
 ## Third Party Integrations
 
 Slack: We have integrated Slack Chat based integration on every request you make
