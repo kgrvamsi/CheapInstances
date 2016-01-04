@@ -1,0 +1,65 @@
+hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+updated: 2016-01-04T17:14:36.147359428Z
+imports:
+- name: 9fans.net/go
+  version: 65b8cf069318223b1e722b4b36e729e5e9bb9eab
+- name: github.com/aws/aws-sdk-go
+  version: 0869a433c1d7bbcd6bde8e217084c0aa1354b596
+- name: github.com/bluele/slack
+  version: 97c70c3d5d5d7a30e336180e1a8b4b768a9b6857
+- name: github.com/davecgh/go-spew
+  version: 5215b55f46b2b919f50a1df0eaa5886afe4e3b3d
+  repo: https://github.com/davecgh/go-spew
+- name: github.com/go-ini/ini
+  version: 887c8d36f8411bededfd2281daa3907f5f36552e
+- name: github.com/golang/lint
+  version: 32a87160691b3c96046c0c678fe57c5bef761456
+  subpackages:
+  - golint
+- name: github.com/golang/protobuf
+  version: 68415e7123da32b07eab49c96d2c4d6158360e9b
+  repo: https://github.com/golang/protobuf
+- name: github.com/jmespath/go-jmespath
+  version: c01cf91b011868172fdcd9f41838e80c9d716264
+- name: github.com/kisielk/errcheck
+  version: 12fd1ab9811e54c55207f3e83134ff59829fbf21
+- name: github.com/kisielk/gotool
+  version: 58a7a198f2ec6ea7af221fd216e7f559d663ce02
+- name: github.com/lsegal/gucumber
+  version: e8116c9c66e641e9f81fc0a79fac923dfc646378
+  repo: https://github.com/lsegal/gucumber
+- name: github.com/nsf/gocode
+  version: 16e3f34ebd5212ede9b3ea39846c01be69933c16
+- name: github.com/pmezard/go-difflib
+  version: e8554b8641db39598be7f6342874b958f12ae1d4
+  repo: https://github.com/pmezard/go-difflib
+- name: github.com/rogpeppe/godef
+  version: ea14e800fd7d16918be88dae9f0195f7bd688586
+- name: github.com/shiena/ansicolor
+  version: a422bbe96644373c5753384a59d678f7d261ff10
+  repo: https://github.com/shiena/ansicolor
+- name: github.com/stretchr/objx
+  version: 1a9d0bb9f541897e62256577b352fdbc1fb4fd94
+  repo: https://github.com/stretchr/objx
+- name: github.com/stretchr/testify
+  version: 5b9da39b66e8e994455c2525c4421c8cc00a7f93
+  repo: https://github.com/stretchr/testify
+- name: github.com/vaughan0/go-ini
+  version: a98ad7ee00ec53921f08832bc06ecf7fd600e6a1
+- name: golang.org/x/crypto
+  version: f18420efc3b4f8e9f3d51f6bd2476e92c46260e9
+  repo: https://golang.org/x/crypto
+- name: golang.org/x/net
+  version: 0cb26f788dd4625d1956c6fd97ffc4c90669d129
+  repo: https://golang.org/x/net
+- name: golang.org/x/text
+  version: cf4986612c83df6c55578ba198316d1684a9a287
+  repo: https://golang.org/x/text
+- name: golang.org/x/tools
+  version: 2dff1e88eb92a374a989dd38e3402481f498ffa2
+  subpackages:
+  - cmd/goimports
+- name: google.golang.org/appengine
+  version: 54bf9150c922186bfc45a00bf9dfcb91a5063275
+  repo: https://google.golang.org/appengine
+devImports: []
