@@ -74,7 +74,8 @@ func main() {
 
 				client := ec2.New(session.New(), &aws.Config{Region: aws.String(regionType)})
 				//	fmt.Println(reflect.TypeOf(client))
-
+				server.GetAvailableZones(client)
+				server.GetTheLeastZone(instanceType, client)
 				params := &ec2.DescribeSpotPriceHistoryInput{
 					InstanceTypes: []*string{
 						aws.String(instanceType),
