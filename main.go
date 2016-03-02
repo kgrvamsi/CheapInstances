@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"github.com/CheapInstances/server"
@@ -8,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/olekukonko/tablewriter"
 	"github.com/vaughan0/go-ini"
 	"log"
 	"os"
@@ -20,6 +22,7 @@ var (
 	choice     string
 	timeNow    = time.Now()
 	instanceid string
+	reqData    = [][]string{}
 )
 
 func main() {
@@ -94,6 +97,10 @@ func main() {
 
 			} else if choice == "2" {
 
+				reader := bufio.NewReader(os.Stdin)
+				fmt.Println("Enter the UserData:")
+				userData, _ := reader.ReadString('\n')
+				fmt.Println(userData + "Is added to the Instance")
 				client := ec2.New(session.New(), &aws.Config{Region: aws.String(regionType)})
 				count, _ := strconv.ParseInt(instanceCount, 10, 64)
 				param := &ec2.RequestSpotInstancesInput{
@@ -104,6 +111,7 @@ func main() {
 						ImageId:      aws.String(instanceImg),
 						InstanceType: aws.String(instanceType),
 						KeyName:      aws.String(instanceKey),
+						UserData:     aws.String(userData),
 					},
 					Type: aws.String("one-time"),
 					//		ValidFrom: aws.Time(time.Now()),
@@ -114,8 +122,17 @@ func main() {
 				slack.AlertMessage(tokenPtr, channelPtr, "Requested Spot Instance Creation Initiated and Under Process for Evaluation")
 			} else if choice == "3" {
 				//slack.AlertMessage(tokenPtr, channelPtr, "Requested for List of Spot Instances Done by the Account")
+
 				client := ec2.New(session.New(), &aws.Config{Region: aws.String(regionType)})
-				server.GetSpotInstancesReq(client)
+				_, reqInst := server.GetSpotInstancesReq(client)
+				table := tablewriter.NewWriter(os.Stdout)
+				table.SetHeader([]string{"SpotId", "State", "Status", "Type"})
+				for i, _ := range reqInst.SpotInstanceRequests {
+					data := []string{*(reqInst.SpotInstanceRequests[i].SpotInstanceRequestId), *(reqInst.SpotInstanceRequests[i].State), *(reqInst.SpotInstanceRequests[i].Status.Code), *(reqInst.SpotInstanceRequests[i].Type)}
+					table.Append(data)
+				}
+				table.Render()
+
 			} else if choice == "4" {
 				fmt.Println("Enter the Spot Instance Id")
 				fmt.Scan(&instanceid)

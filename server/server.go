@@ -53,7 +53,7 @@ func CreateSpotInstance(client *ec2.EC2, params *ec2.RequestSpotInstancesInput) 
 	fmt.Println(resp)
 }
 
-func GetSpotInstancesReq(client *ec2.EC2) {
+func GetSpotInstancesReq(client *ec2.EC2) (error, resp *ec2.DescribeSpotInstanceRequestsOutput) {
 
 	params := &ec2.DescribeSpotInstanceRequestsInput{}
 
@@ -61,7 +61,7 @@ func GetSpotInstancesReq(client *ec2.EC2) {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	fmt.Println(resp)
+	return
 }
 
 func CancelSpotInstances(client *ec2.EC2, instanceid string) {

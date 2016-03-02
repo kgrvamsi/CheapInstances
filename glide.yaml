@@ -8,6 +8,7 @@ package: main
 import:
   # Fetch package similar to 'go get':
     - package: github.com/aws/aws-sdk-go
+    - package: github.com/olekukonko/tablewriter
     - package: golang.org/x/tools/cmd/goimports
     - package: github.com/nsf/gocode
     - package: github.com/rogpeppe/godef
