@@ -4,18 +4,19 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/CheapInstances/server"
-	"github.com/CheapInstances/slack"
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/olekukonko/tablewriter"
-	"github.com/vaughan0/go-ini"
 	"log"
 	"os"
 	_ "reflect"
 	"strconv"
 	"time"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/kgrvamsi/CheapInstances/server"
+	"github.com/kgrvamsi/CheapInstances/slack"
+	"github.com/olekukonko/tablewriter"
+	"github.com/vaughan0/go-ini"
 )
 
 var (
@@ -73,11 +74,14 @@ func main() {
 			fmt.Scan(&choice)
 
 			if choice == "1" {
-				slack.AlertMessage(tokenPtr, channelPtr, "Getting the Price History")
+				// slack.AlertMessage(tokenPtr, channelPtr, "Getting the Price History")
 
 				client := ec2.New(session.New(), &aws.Config{Region: aws.String(regionType)})
 				//	fmt.Println(reflect.TypeOf(client))
-				server.GetAvailableZones(client)
+
+				// Why are we doing this?
+				// server.GetAvailableZones(client)
+
 				server.GetTheLeastZone(instanceType, client)
 				params := &ec2.DescribeSpotPriceHistoryInput{
 					InstanceTypes: []*string{

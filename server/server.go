@@ -3,11 +3,12 @@ package server
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"log"
-	_ "reflect"
+	// _ "reflect"
 	"strconv"
 )
 
@@ -35,6 +36,7 @@ type Data struct {
 	Zones  []string `json:"zones"`
 }
 
+// SpotInstancePriceHistory shows the price history
 func SpotInstancePriceHistory(client *ec2.EC2, params *ec2.DescribeSpotPriceHistoryInput) {
 
 	resp, err := client.DescribeSpotPriceHistory(params)
@@ -64,6 +66,7 @@ func GetSpotInstancesReq(client *ec2.EC2) (error, resp *ec2.DescribeSpotInstance
 	return
 }
 
+// CancelSpotInstances will cancel the spot instances
 func CancelSpotInstances(client *ec2.EC2, instanceid string) {
 	params := &ec2.CancelSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []*string{ // Required
@@ -78,10 +81,11 @@ func CancelSpotInstances(client *ec2.EC2, instanceid string) {
 	fmt.Println(resp)
 }
 
-//func GetTheLeastZone(instance string, client *ec2.EC2) {
+//GetTheLeastZone will get all the zones with least prices
 func GetTheLeastZone(instance string, client *ec2.EC2) {
-	_, k := GetAvailableZones(client)
-	fmt.Println(len(k))
+	k, _ := GetAvailableZones(client)
+
+	// fmt.Println(len(k))
 
 	for i := range k {
 		var val []float64
@@ -111,11 +115,9 @@ func GetTheLeastZone(instance string, client *ec2.EC2) {
 	}
 }
 
-/*
-* This Function will get all the Zones available for the User
-* From Different Regions Available for his account
- */
-func GetAvailableZones(client *ec2.EC2) (err error, datas []Data) {
+//GetAvailableZones will get all the Zones available for the User
+//From Different Regions Available for his account
+func GetAvailableZones(client *ec2.EC2) (datas []Data, err error) {
 
 	params := &ec2.DescribeRegionsInput{}
 
