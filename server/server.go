@@ -37,14 +37,20 @@ type Data struct {
 }
 
 // SpotInstancePriceHistory shows the price history
-func SpotInstancePriceHistory(client *ec2.EC2, params *ec2.DescribeSpotPriceHistoryInput) {
+func SpotInstancePriceHistory(client *ec2.EC2, params *ec2.DescribeSpotPriceHistoryInput) (error, resp *ec2.DescribeSpotPriceHistoryOutput) {
 
 	resp, err := client.DescribeSpotPriceHistory(params)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	fmt.Println(resp)
+
+	return
 }
+
+/*
+* Func := CreateSpotInstance
+*  This will create the SpotInstances
+ */
 
 func CreateSpotInstance(client *ec2.EC2, params *ec2.RequestSpotInstancesInput) {
 
@@ -54,6 +60,12 @@ func CreateSpotInstance(client *ec2.EC2, params *ec2.RequestSpotInstancesInput) 
 	}
 	fmt.Println(resp)
 }
+
+/*
+* Func := @GetSpotInstancesReq
+* This gets the List of Spot instances requests
+* so far done by the account
+ */
 
 func GetSpotInstancesReq(client *ec2.EC2) (error, resp *ec2.DescribeSpotInstanceRequestsOutput) {
 
@@ -66,7 +78,11 @@ func GetSpotInstancesReq(client *ec2.EC2) (error, resp *ec2.DescribeSpotInstance
 	return
 }
 
-// CancelSpotInstances will cancel the spot instances
+/*
+* Func := @CancelSpotInstances
+* CancelSpotInstances will cancel the spot instances
+ */
+
 func CancelSpotInstances(client *ec2.EC2, instanceid string) {
 	params := &ec2.CancelSpotInstanceRequestsInput{
 		SpotInstanceRequestIds: []*string{ // Required
@@ -84,8 +100,6 @@ func CancelSpotInstances(client *ec2.EC2, instanceid string) {
 //GetTheLeastZone will get all the zones with least prices
 func GetTheLeastZone(instance string, client *ec2.EC2) {
 	k, _ := GetAvailableZones(client)
-
-	// fmt.Println(len(k))
 
 	for i := range k {
 		var val []float64

@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/CheapInstances/server"
+	"github.com/CheapInstances/slack"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/kgrvamsi/CheapInstances/server"
-	"github.com/kgrvamsi/CheapInstances/slack"
 	"github.com/olekukonko/tablewriter"
 	"github.com/vaughan0/go-ini"
 )
@@ -82,7 +82,7 @@ func main() {
 				// Why are we doing this?
 				// server.GetAvailableZones(client)
 
-				server.GetTheLeastZone(instanceType, client)
+				// server.GetTheLeastZone(instanceType, client)
 				params := &ec2.DescribeSpotPriceHistoryInput{
 					InstanceTypes: []*string{
 						aws.String(instanceType),
@@ -95,9 +95,9 @@ func main() {
 					MaxResults: aws.Int64(10),
 				}
 
-				//fmt.Println(reflect.TypeOf(params))
-				//fmt.Println(params)
-				server.SpotInstancePriceHistory(client, params)
+				_, data := server.SpotInstancePriceHistory(client, params)
+
+				fmt.Println(data.SpotPriceHistory)
 
 			} else if choice == "2" {
 
