@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/CheapInstances/server"
-	"github.com/CheapInstances/slack"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/kgrvamsi/CheapInstances/server"
+	"github.com/kgrvamsi/CheapInstances/slack"
 	"github.com/olekukonko/tablewriter"
 	"github.com/vaughan0/go-ini"
 )
